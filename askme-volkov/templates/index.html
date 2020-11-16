@@ -1,17 +1,21 @@
 {% extends "base.html" %}
+
+{% block navbar %}
+    {% include "inc/navbar_auth.html" %}
+{% endblock %}
+
 {% block content %}
-
-  <div class="alert alert">
-    <h1 class="my-4"><a href="{% url 'index' %}" class="askme-black_a">New Questions</a>
-      <a href="{% url 'hot' %}" class="askme-black_a ml-4 askme-notChoosen">Hot Questions</a>
-    </h1>
-
-    <!-- Для генирации карточек  -->
-    {% for question in data_for_paginator %}
-      {% include "inc/question.html" %}
+    {% for question in questions %}
+        {% include "inc/question.html" %}
+        <br>
     {% endfor %}
 
-    {% include "inc/paginator.html" %}
-  </div>
+    <br>
+    {% include "inc/pagination.html" %}
+{% endblock %}
 
-  {% endblock %}
+{% block additional_info %}
+    {% include "inc/best_members.html" %}
+    <br>
+    {% include "inc/popular_tags.html" %}
+{% endblock %}

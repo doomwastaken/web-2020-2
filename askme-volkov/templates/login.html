@@ -1,62 +1,15 @@
 {% extends "base.html" %}
-{% load static %}
+
+{% block navbar %}
+    {% include "inc/navbar_unauth.html" %}
+{% endblock %}
+
 {% block content %}
+    {% include "inc/login_form.html" %}
+{% endblock %}
 
-  <div class="alert alert-dark bg-light mt-2 ml-3 mr-2 askme-minH250">
-    <div class="row w-100">
-      <div class="col-6">
-        <div class="row ml-4">
-          <h2 class="my-4">Log in</h2>
-        </div>
-        <div class="row ml-4 mb-2">
-          <p class="askme-error">Place for error</p>
-        </div>
-        <div class="row ml-4">
-          <form method="post" class="w-100">
-            {% csrf_token %}
-            <div class="form-group row">
-              <label for="loginLogin" class="col-md-2 col-sm-12 col-form-label">Login</label>
-              <div class="col-md-10 col-sm-12">
-                <input type="text"
-                       name="username"
-                       class="form-control"
-                       id="loginLogin"
-                       placeholder="Login...">
-              </div>
-            </div>
-            <div class="form-group row">
-              <label for="loginPassword" class="col-md-2 col-sm-12 col-form-label">Password</label>
-              <div class="col-md-10 col-sm-12">
-                <input type="password"
-                       name="password"
-                       class="form-control"
-                       id="loginPassword"
-                       placeholder="Password...">
-              </div>
-            </div>
-
-            <div class="form-group row">
-              <div class="col-md-2 col-sm-12">
-              </div>
-              <div class="form-group col-md-10 col-sm-12">
-                <button type="submit" class="btn  btn-outline-info w-25">Log in</button>
-              </div>
-            </div>
-            <div class="row mb-5 mt-0">
-              <div class="col-md-2 col-sm-12">
-              </div>
-              <div class="col-md-10 col-sm-12">
-                <a href="{% url 'register' %}">Create new account</a>
-              </div>
-            </div>
-
-
-          </form>
-        </div>
-      </div>
-      <div class="col-6">
-        <img src="{% static '/img/Logo.png' %}" alt="..." class="askme-img200 askme-sheep">
-      </div>
-    </div>
-  </div>
+{% block additional_info %}
+    {% include "inc/best_members.html" %}
+    <br>
+    {% include "inc/popular_tags.html" %}
 {% endblock %}

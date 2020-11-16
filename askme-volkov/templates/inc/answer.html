@@ -1,35 +1,30 @@
-<div class="card mb-12 bg-light mt-2 mb-2">
-  <div class="row no-gutters">
-    <div class="col-md-4">
-      <div class="row w-100 m-2">
-        <img src="{{MEDIA_URL}}/{{ answer.author.avatar}}" class="card-img askme-border1px my-2 mx-2 askme-img200" alt="userAvatar">
-      </div>
-      <div class="row w-100 m-2 ml-auto">
-        <div class="col-mb-4">
-          <span class="askme-counter mx-4 my-2">{{answer.rating}}</span>
+{% load static %}
+
+<!--Answer example-->
+<div class="container p-1 border border-dark">
+    <div class="d-flex flex-row">
+        <div class="d-flex flex-column col-md-2">
+            <img src="{% static "img/default_avatar.jpg" %}" width="50" height="50" class="rounded" alt="">
+            <br>
+            <div class="flex-row">
+                <div class="btn-group-vertical col-md-5">
+                    <button type="button" class="btn btn-outline-dark">+</button>
+                    <button type="button" class="btn btn-outline-dark">-</button>
+                </div>
+                <div class="d-inline">{{ answer.rating }}</div>
+            </div>
         </div>
-        <div class="col-mb-4">
-          <a href="#" class="mx-2 my-4 askme-like_dislike"><i class="far fa-thumbs-up"></i></a>
+
+        <div class="d-flex flex-column align-items-start col-md-10 ">
+            <blockquote class="mb-auto">
+                {{ answer.content }}
+            </blockquote>
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" value="" id="correctAnswer">
+                <label class="form-check-label" for="correctAnswer">
+                    This is correct answer!
+                </label>
+            </div>
         </div>
-        <div class="col-mb-4">
-          <a href="#" class="mx-2 my-4 askme-like_dislike"><i class="far fa-thumbs-down"></i></a>
-        </div>
-      </div>
     </div>
-    <div class="col-md-8 ml-0">
-      <div class="card-body ml-0">
-        <p class="card-text">{{answer.content}}</p>
-        <div class="row w-100 m-0">
-          <div class="col-mb-12">
-            {% if answer.is_correct == 1 %}
-              <span class="askme-correctAnswer"> Correct!</span>
-            {% else %}
-              <span class="askme-notcorrectAnswer"> Correct!</span>
-            {% endif %}
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
 </div>
-<hr>
