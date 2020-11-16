@@ -2,8 +2,8 @@
 {% block content %}
 
   <div class="alert alert">
-    <h1 class="my-4"><a href="{% url 'index' %}" class="askme-black_a">New Questions</a>
-      <a href="{% url 'hot' %}" class="askme-black_a ml-4 askme-notChoosen">Hot Questions</a>
+    <h1 class="my-4"><a href="{% url 'index' %}" class="askme-black_a askme-notChoosen">New Questions</a>
+      <a href="{% url 'hot' %}" class="askme-black_a ml-3">Hot Questions</a>
     </h1>
 
     <!-- Для генирации карточек  -->
@@ -14,4 +14,4 @@
     {% include "inc/paginator.html" %}
   </div>
 
-  {% endblock %}
+{% endblock %}

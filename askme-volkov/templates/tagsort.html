@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block content %}
+
+          <div class="alert alert">
+
+            <h1 class="my-4">Tag: <span class="ml-2">{{tag.title }}</span>
+            </h1>
+
+            {% for question in data_for_paginator %}
+              {% include "inc/question.html" %}
+            {% endfor %}
+
+            {% if data_for_paginator.all.count > 5 %}
+                {% include "inc/paginator.html" %}
+            {% endif %}
+          </div>
+
+{% endblock %}

@@ -1,0 +1,12 @@
+{% load mathfilters %}
+{% if tag.id|mod:5 == 0 %}
+  <a class="askme_tag1" href="{% url 'tag' tag_name=tag.title %}">{{tag.title}}</a>
+{% elif tag.id|mod:5 == 3 %}
+  <a class="askme_tag2" href="{% url 'tag' tag_name=tag.title %}">{{tag.title}}</a>
+{% elif tag.id|mod:5 == 1 %}
+  <a class="askme_tag3" href="{% url 'tag' tag_name=tag.title %}">{{tag.title}}</a>
+{% elif tag.id|mod:5 == 2 %}
+  <a class="askme_tag4" href="{% url 'tag' tag_name=tag.title %}">{{tag.title}}</a>
+{% elif tag.id|mod:5 == 4 %}
+  <a class="askme_tag5" href="{% url 'tag' tag_name=tag.title %}">{{tag.title}}</a>
+{% endif %}
