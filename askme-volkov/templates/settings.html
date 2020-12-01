@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block navbar %}
+    {% include "inc/navbar_auth.html" %}
+{% endblock %}
+
+{% block content %}
+    {% include "inc/settings_form.html" %}
+{% endblock %}
+
+{% block additional_info %}
+    {% include "inc/best_members.html" %}
+    <p>
+    {% include "inc/popular_tags.html" %}
+{% endblock %}

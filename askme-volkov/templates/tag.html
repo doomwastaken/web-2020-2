@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block navbar %}
+    {% include "inc/navbar_auth.html" %}
+{% endblock %}
+
+{% block content %}
+    <h3>Search by tag: {{ tag_name }}</h3>
+    {% for question in questions %}
+        {% include "inc/question.html" %}
+        <p>
+    {% endfor %}
+
+    <p>
+    {% include "inc/pagination.html" %}
+{% endblock %}
+
+{% block additional_info %}
+    {% include "inc/best_members.html" %}
+    <p>
+    {% include "inc/popular_tags.html" %}
+{% endblock %}

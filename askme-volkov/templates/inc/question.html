@@ -1,0 +1,46 @@
+{% load static %}
+
+<!--Question-->
+<div class="container p-1 border border-dark">
+    <div class="d-flex flex-row">
+        <!--Picture and likes-->
+        <div class="d-flex flex-column align-items-center col-md-2">
+            
+            <img src="{% static "img/default_avatar.jpg" %}" width="100" height="100" class="rounded" alt="">
+            <p>
+                
+            <div class="flex-row align-self-stretch">
+                <div class="btn-group-vertical align-items-center col-md-9">
+                    <button type="button" class="btn btn-outline-dark">+</button>
+                    <button type="button" class="btn btn-outline-dark">-</button>
+                </div>
+                <div class="d-inline">{{ question.rating }}</div>
+            </div>
+            <div class="flex-row">
+            </div>
+        </div>
+
+        <!--Question info-->
+        <div class="d-flex flex-column align-items-start col-md-9 ">
+            <a href={% url 'question' qid=question.id %}>
+                <h3>{{ question.title }}</h3>
+            </a>
+            <blockquote class="mb-auto">
+                {{ question.content }}
+            </blockquote>
+            <div class="tag-container align-self-end">
+                {% for tag in question.tags.all %}
+                    <a href="{% url 'tag' tag.name %}" class="badge badge-pill bg-dark text-white">
+                        {{ tag.name }}
+                    </a>
+                {% endfor %}
+            </div>
+            <div class="d-flex flex-row align-self-end">
+                <div class="p-2"><div class="badge badge-pill bg-dark text-white">Answers ({{ num }})</div></div>
+                <div class="p-2"><div class="badge badge-pill bg-dark text-white">by AuthorName </div></div>
+                <div class="p-2"><div class="badge badge-pill bg-dark text-white">Date ({{ question.date}})</div></div>
+            </div>
+        </div>
+
+    </div>
+</div>

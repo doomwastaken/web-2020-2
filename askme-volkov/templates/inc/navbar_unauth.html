@@ -1,0 +1,27 @@
+{% load static %}
+
+<!-- Header -->
+<nav class="header navbar text-white col-md-12">
+    <div class="col-md-3">
+        <a href="{% url 'index' %}" class="navbar-brand text-white">
+            <h2>
+                <!--  #<img src="{% static "/img/ask.png" %}" width="40" height="40" class="d-inline-block align-top" alt="">//-->
+                AskVolkov
+            </h2>
+        </a>
+    </div>
+
+    <div class="row col-md-2 justify-content-between">
+        <a href="{% url 'best' %}" class="d-inline btn btn-success col-md-5">Best</a>
+        <a href="{% url 'new' %}" class="d-inline btn btn-success col-md-5">New</a>
+    </div>
+
+    <div class="col-md-4">
+        <input class="form-control" type="search" placeholder="Search" aria-label="Search">
+    </div>
+
+    <div class="col-md-3">
+        <a href="{% url 'login' %}" class="btn btn-success col-md-4">log in</a>
+        <a href="{% url 'register' %}" class="btn btn-success col-md-4">register</a>
+    </div>
+</nav>
