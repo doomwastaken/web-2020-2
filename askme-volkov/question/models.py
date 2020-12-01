@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.contenttypes.fields import GenericForeignKey, GenericRelation
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.auth.models import AbstractUser
+from django.contrib.auth import authenticate
 from django.core.exceptions import ObjectDoesNotExist
 
 
@@ -21,9 +22,9 @@ class ProfileManager(models.Manager):
             return
 
         rating = 0
-        for q in Question.objects.filter(question__author_id=pid):
+        for q in Question.objects.by_profile_id(pid):
             rating += q.rating
-        for a in Answer.objects.filter(answer__author_id=pid):
+        for a in Answer.objects.by_profile_id(pid):
             rating += a.rating
 
         profile.rating = rating
@@ -38,6 +39,13 @@ class ProfileManager(models.Manager):
         top = sorted_profiles[:top_amount]
         return top
 
+#class Author(models.Model):
+#    user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+ #   avatar = models.ImageField(upload_to="avatars/")
+ #   rating = models.IntegerField()
+
+#    def __str__(self):
+ #       return self.user.name
 
 class Profile(AbstractUser):
     avatar = models.CharField(max_length=255)
@@ -79,6 +87,9 @@ class Like(models.Model):
                                       blank=False)
 
     objects = LikeManager()
+
+    class Meta:
+        unique_together = ('content_type', 'object_id', 'author')
 
     def __str__(self):
         return f"Like by {self.author.username}: {self.rating}"
@@ -168,7 +179,7 @@ class Question(models.Model):
                                null=False,
                                blank=False)
     tags = models.ManyToManyField(Tag)
-
+    date = models.DateTimeField(auto_now_add=True)
     likes = GenericRelation(Like, related_query_name='question', on_delete=models.CASCADE)
     rating = models.IntegerField(default=0,
                                  null=False,

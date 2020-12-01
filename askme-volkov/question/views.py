@@ -2,12 +2,16 @@ from django.core.paginator import Paginator
 from django.shortcuts import render
 from question.models import Profile, Question, Answer, Tag
 from django.http import HttpResponseNotFound
+from django.forms.models import model_to_dict
 
-questions_per_page = 3
-answer_per_page = 3
-top_tags_amount = 15
-top_users_amount = 8
-pages_around_current = 3
+questions_per_page = 4
+answer_per_page = 4
+top_tags_amount = 8
+top_users_amount = 5
+pages_around_current = 2
+
+def notFound(request):
+    return HttpResponseNotFound("hello. Your page not found")
 
 
 def paginate(objects_list, page_size, request):
@@ -30,6 +34,11 @@ def get_page_range(page_range, curr_page, pages_left, pages_right=None):
 
     return page_range[left_end:right_end]
 
+def number_of_answers(post: Question):
+    result = model_to_dict(post)
+    if isinstance(post, Question):
+        result['num'] = post.Question.count()
+    return result
 
 def index(request):
     all_questions = Question.objects.get_queryset()
@@ -38,13 +47,13 @@ def index(request):
     page, paginator = paginate(all_questions, questions_per_page, request)
     page_range = get_page_range(page_range=paginator.page_range, curr_page=page.number,
                                 pages_left=pages_around_current, pages_right=pages_around_current)
-
-    return render(request, 'index.html',
-                  {'questions': page.object_list,
+    context = {'questions': page.object_list,
                    'page': page,
                    'page_range': page_range,
                    'best_users': best_users,
-                   'popular_tags': popular_tags})
+                   'popular_tags': popular_tags,
+                   }
+    return render(request, 'index.html', context)
 
 
 def best(request):
@@ -54,13 +63,11 @@ def best(request):
     page, paginator = paginate(all_questions, questions_per_page, request)
     page_range = get_page_range(page_range=paginator.page_range, curr_page=page.number,
                                 pages_left=pages_around_current, pages_right=pages_around_current)
-
-    return render(request, 'index.html',
-                  {'questions': page.object_list,
+    context = {'questions': page.object_list,
                    'page': page,
                    'page_range': page_range,
-                   'best_users': best_users,
-                   'popular_tags': popular_tags})
+                    }
+    return render(request, 'index.html', context)
 
 
 def new(request):
@@ -70,13 +77,13 @@ def new(request):
     page, paginator = paginate(all_questions, questions_per_page, request)
     page_range = get_page_range(page_range=paginator.page_range, curr_page=page.number,
                                 pages_left=pages_around_current, pages_right=pages_around_current)
-
-    return render(request, 'index.html',
-                  {'questions': page.object_list,
+    context = {'questions': page.object_list,
                    'page': page,
                    'page_range': page_range,
                    'best_users': best_users,
-                   'popular_tags': popular_tags})
+                   'popular_tags': popular_tags}
+    return render(request, 'index.html',context)
+                  
 
 
 def question(request, qid):
@@ -87,25 +94,27 @@ def question(request, qid):
     answers = Answer.objects.by_question_id(qid)
     popular_tags = Tag.objects.top(top_tags_amount)
     best_users = Profile.objects.top(top_users_amount)
-
+    num_answers = answers.count
     page, paginator = paginate(answers, answer_per_page, request)
     page_range = get_page_range(page_range=paginator.page_range, curr_page=page.number,
                                 pages_left=pages_around_current, pages_right=pages_around_current)
-    return render(request, 'question.html',
-                  {'question': curr_question,
+    context = {'question': curr_question,
                    'answers': page.object_list,
                    'page': page,
                    'page_range': page_range,
                    'best_users': best_users,
-                   'popular_tags': popular_tags})
+                   'popular_tags': popular_tags,
+                   'num': num_answers}
+                   #
+    return render(request, 'question.html', context)
 
 
 def ask(request):
     popular_tags = Tag.objects.top(top_tags_amount)
     best_users = Profile.objects.top(top_users_amount)
-    return render(request, 'ask.html',
-                  {'best_users': best_users,
-                   'popular_tags': popular_tags})
+    context = {'best_users': best_users,
+                   'popular_tags': popular_tags}
+    return render(request, 'ask.html', context)
 
 
 def tag(request, tag_name):
@@ -115,35 +124,32 @@ def tag(request, tag_name):
     page, paginator = paginate(questions, questions_per_page, request)
     page_range = get_page_range(page_range=paginator.page_range, curr_page=page.number,
                                 pages_left=pages_around_current, pages_right=pages_around_current)
-
-    return render(request, 'tag.html',
-                  {'questions': page.object_list,
+    context = {'questions': page.object_list,
                    'page': page,
                    'page_range': page_range,
-                   'tag_name': tag_name,
-                   'best_users': best_users,
-                   'popular_tags': popular_tags})
+                   }
+                   #'popular_tags': popular_tags
+    return render(request, 'tag.html', context)
 
 
 def settings(request):
     popular_tags = Tag.objects.top(top_tags_amount)
     best_users = Profile.objects.top(top_users_amount)
-    return render(request, 'settings.html',
-                  {'best_users': best_users,
-                   'popular_tags': popular_tags})
+    context = {'best_users': best_users,
+                   'popular_tags': popular_tags}
+    return render(request, 'settings.html', context)
 
 
 def login(request):
     popular_tags = Tag.objects.top(top_tags_amount)
     best_users = Profile.objects.top(top_users_amount)
-    return render(request, 'login.html',
-                  {'best_users': best_users,
-                   'popular_tags': popular_tags})
-
+    context = {'best_users': best_users,
+                   'popular_tags': popular_tags}
+    return render(request, 'login.html', context)
 
 def register(request):
     popular_tags = Tag.objects.top(top_tags_amount)
     best_users = Profile.objects.top(top_users_amount)
-    return render(request, 'register.html',
-                  {'best_users': best_users,
-                   'popular_tags': popular_tags})
+    context = {'best_users': best_users,
+                   'popular_tags': popular_tags}
+    return render(request, 'register.html', context)

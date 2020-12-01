@@ -8,15 +8,15 @@
     <h3>Search by tag: {{ tag_name }}</h3>
     {% for question in questions %}
         {% include "inc/question.html" %}
-        <br>
+        <p>
     {% endfor %}
 
-    <br>
+    <p>
     {% include "inc/pagination.html" %}
 {% endblock %}
 
 {% block additional_info %}
     {% include "inc/best_members.html" %}
-    <br>
+    <p>
     {% include "inc/popular_tags.html" %}
 {% endblock %}

@@ -5,7 +5,7 @@
     <!--Login input-->
     <div class="form-group row">
         <label for="inputLogin" class="col-md-2">Login</label>
-        <input type="email" class="form-control col-md-6" id="inputLogin" aria-describedby="Your Login"
+        <input type="text" class="form-control col-md-6" id="inputLogin" aria-describedby="Your Login"
                placeholder="Enter Login" required>
     </div>
 
@@ -19,7 +19,7 @@
     <!--Nickname input-->
     <div class="form-group row">
         <label for="inputNickname" class="col-md-2">Nickname</label>
-        <input type="email" class="form-control col-md-6" id="inputNickname" aria-describedby="Your Nickname"
+        <input type="text" class="form-control col-md-6" id="inputNickname" aria-describedby="Your Nickname"
                placeholder="Enter Nickname" required>
     </div>
 
@@ -35,10 +35,11 @@
         <div class="form-group row">
             <label for="uploadAvatar" class="col-md-2 col-form-label"></label>
 
+            {# TODO(al): fixe choose file #}
             <div class="custom-file col-sm-6">
                 <input type="file" class="custom-file-input" id="uploadAvatar" required>
                 <label class="custom-file-label" for="uploadAvatar">Choose file...</label>
-                <div class="invalid-feedback">Example invalid custom file feedback</div>
+                <div class="invalid-feedback">Invalid custom file feedback</div>
             </div>
         </div>
     </div>
