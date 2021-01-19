@@ -1,15 +1,15 @@
-{% extends "base.html" %}
-
-{% block navbar %}
-    {% include "inc/navbar_auth.html" %}
-{% endblock %}
+{% extends 'base.html' %}
+{% load static %}
+{% load list_tags %}
 
 {% block content %}
-    {% include "inc/settings_form.html" %}
-{% endblock %}
 
-{% block additional_info %}
-    {% include "inc/best_members.html" %}
-    <p>
-    {% include "inc/popular_tags.html" %}
-{% endblock %}
+<div class="row pl-3">
+  <p class="ask-block-header">Settings: {{ user.profile.nickname }}</p>
+</div>
+
+<div class="col-md-6 pl-0">
+  {% include 'inc/input_form.html'%}<!-- with submit='Save' -->
+</div>
+
+{% endblock content %}

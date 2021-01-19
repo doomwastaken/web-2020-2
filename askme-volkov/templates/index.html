@@ -1,21 +1,16 @@
-{% extends "base.html" %}
-
-{% block navbar %}
-    {% include "inc/navbar_auth.html" %}
-{% endblock %}
+{% extends 'base.html' %}
+{% load static %}
 
 {% block content %}
-    {% for question in questions %}
-        {% include "inc/question.html" %}
-        <p>
-    {% endfor %}
 
-    <p>
-    {% include "inc/pagination.html" %}
-{% endblock %}
+<div class="row mb-2 pl-3">
+  <p class="ask-block-header align-self-baseline mr-3">{{ title }}</p>
+  <a class="ask-list-inactive-header nav-link align-self-baseline" href="{% url switch_url %}" >{{ switch_title }}</a>
+</div>
 
-{% block additional_info %}
-    {% include "inc/best_members.html" %}
-    <p>
-    {% include "inc/popular_tags.html" %}
-{% endblock %}
+{% for question, like_sign in questions %}
+{% include 'inc/question_preview.html' %}
+{% endfor %}
+{% include 'inc/pager.html' with object=pages %}
+<script src="{% static 'js/question.js' %}"></script>
+{% endblock content %}

@@ -1,26 +1,30 @@
-{% extends "base.html" %}
-
-{% block navbar %}
-    {% include "inc/navbar_auth.html" %}
-{% endblock %}
+{% extends 'base.html' %}
+{% load static %}
 
 {% block content %}
-    {% include "inc/question.html" %}
-    <p><p>
+<div class="container-fluid ask-question p-0 my-4">
+  <div class="row">
+    <div class="col-md-3">
+      {% include 'inc/left_col.html' with votes=question.rating profile=question.author object_id=question.id object_type='question' like_sign=q_like_sign %}
+    </div>
+    <div class="col-md-9">
+      <p class="mt-0 mb-1 ask-question-title">{{ question.title }}</p>
+      <p class="text-justify pl-0 pr-2 mb-1">{{ question.text }}</p>
+      <div class="row mx-0">
+        {% include 'inc/question_tags.html' with tags=question.tags.all %}
+      </div>
+    </div>
+  </div>
+</div>
+{% for answer, like_sign in answers %}
+{% include 'inc/answer.html' %}
+{% endfor %}
 
-    {% for answer in answers %}
-        {% include "inc/answer.html" %}
-    {% endfor %}
+{% include 'inc/pager.html' with object=pages %}
 
-    <p>
-    {% include "inc/pagination.html" %}
-
-    <p><p>
-    {% include "inc/answer_form.html" %}
-{% endblock %}
-
-{% block additional_info %}
-    {% include "inc/best_members.html" %}
-    <p>
-    {% include "inc/popular_tags.html" %}
-{% endblock %}
+<a name="answer"></a>
+{% if user.is_authenticated %}
+{% include 'inc/input_form.html' with submit='Answer' %}
+{% endif %}
+<script src="{% static 'js/question.js' %}"></script>
+{% endblock content %}

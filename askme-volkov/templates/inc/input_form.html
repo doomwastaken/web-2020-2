@@ -1,0 +1,21 @@
+{% load static %}
+{% for e in form.non_field_error %}
+  <div class="text-danger">{{ e }}</div>
+{% endfor %}
+<form class="ask-form needs-validation mb-3" method="POST" enctype="multipart/form-data" novalidate>
+  {% csrf_token %}
+  {% for f in form.visible_fields %}
+    {% if f.id_for_label == 'avatar-file' %}
+      {% include 'inc/avatar_upload.html' with avatar=form.avatar %}
+    {% else %}
+      <div class="fieldWrapper mb-3">
+      {% if f.label %}
+        {{ f.label_tag }}
+      {% endif %}
+      {{ f.as_widget }}
+      <div class="p-0 text-danger">{{ f.errors }}</div>
+      </div>
+    {% endif %}
+  {% endfor %}
+  <button class="btn btn-outline-primary mt-3" type="submit">Save</button>
+</form>

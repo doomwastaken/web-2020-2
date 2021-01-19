@@ -1,33 +1,19 @@
-{% load static %}
-
-<!--Answer example-->
-<div class="container p-1 border border-dark">
-    <div class="d-flex flex-row">
-        <div class="d-flex flex-column col-md-2">
-            <img src="{% static "img\default_avatar.jpg"%}" width="65" height="65" class="align-items-start" alt=""><p>
-            <div class="flex-row alight-self-left">
-                <div class="btn-group-vertical align-items-stretch col-md-9">
-                    <button type="button" class="btn btn-outline-dark">+</button>
-                    <button type="button" class="btn btn-outline-dark">-</button>
-                </div>
-                <div class="d-inline alight-self-right flex-column">{{ answer.rating }}</div>
-            </div>
-        </div>
-
-        <div class="d-flex flex-column align-items-start col-md-9 ">
-            <blockquote class="mb-auto">
-                {{ answer.content }}
-            </blockquote>
-            <div class="form-check align-self-end">
-                <input class="form-check-input" type="checkbox" value="" id="correctAnswer">
-                <label class="form-check-label" for="correctAnswer">
-                    This is correct answer!
-                </label>
-            </div>
-            <div class="d-flex flex-row align-self-end">
-                <div class="p-2"><div class="badge badge-pill bg-dark text-white">by AuthorName </div></div>
-                <div class="p-2"><div class="badge badge-pill bg-dark text-white">Date ({{ question.date}})</div></div>
-            </div>
-        </div>
+<a name="{{ answer.pk }}"></a>
+<div class="container-fluid border rounded mb-4 p-1">
+  <div class="row">
+    <div class="col-md-2">
+      {% include 'inc/left_col.html' with votes=answer.rating profile=answer.author object_id=answer.id object_type='answer' %}
     </div>
+    <div class="col-md-10">
+      <p class="text-justify pl-0 pr-2 mt-1 mb-1">{{ answer.text }}</p>
+      <div class="row ml-0 my-1">
+        <div class="custom-control custom-checkbox">
+          <input class="custom-control-input" type="checkbox" onclick="mark_as_correct({{ answer.id }});" value="" id="answer_{{ answer.pk }}_checked"
+            {% if answer.is_right %} checked disabled
+            {% elif request.user.id != question.author.user.id %} disabled {% endif %} >
+          <label class="custom-control-label text-dark" for="answer_{{ answer.pk }}_checked">Correct</label>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>

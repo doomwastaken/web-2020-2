@@ -1,15 +1,14 @@
-{% extends "base.html" %}
-
-{% block navbar %}
-    {% include "inc/navbar_unauth.html" %}
-{% endblock %}
-
+{% extends 'base.html' %}
 {% block content %}
-    {% include "inc/login_form.html" %}
-{% endblock %}
 
-{% block additional_info %}
-    {% include "inc/best_members.html" %}
-    <p>
-    {% include "inc/popular_tags.html" %}
-{% endblock %}
+<div class="row mb-2 pl-3">
+  <p class="ask-block-header p-0">Log In</p>
+</div>
+
+<div class="col-md-6 p-0">
+  {% include 'inc/input_form.html' with submit='Log in' %}
+</div>
+
+<a href="{% url 'register' %}">Create new account</a>
+
+{% endblock content %}
