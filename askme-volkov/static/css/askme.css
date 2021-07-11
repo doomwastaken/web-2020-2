@@ -1,0 +1,89 @@
+.ask-navbar-avatar {
+  object-fit: contain;
+  height: 3em;
+}
+
+.navbar {
+  height: 4em;
+}
+
+.ask-avatar-thumb {
+  width: 100%;
+  height: 100%;
+  border-radius: 5%;
+  max-height: 6em;
+  object-fit: contain;
+}
+
+.ask-avatar-settings {
+  object-fit: contain;
+  max-height: 8em;
+}
+
+a, a:visited, a:hover, a:link, a:active {
+  text-decoration: none;
+}
+
+.ask-navbar-search {
+  width: 10em;
+}
+
+.ask-list-inactive-header {
+  font-size: 1.5em;
+}
+
+.ask-question-title {
+  font-size: 1.3em;
+}
+
+.ask-block-header {
+  font-size: 2em;
+}
+
+.ask-popular-tag {
+  padding-right: 2em;
+}
+
+.ask-best-member {
+  font-size: 1.2em;
+  color: #6a6a6a;
+}
+
+.ask-question .ask-question-title {
+  font-size: 2em;
+}
+
+.ask-question .ask-avatar-thumb {
+  max-height: 9em;
+}
+
+.ask-left-col-name {
+  font-size: 0.75em;
+}
+
+.footer-text {
+  font-size: 0.6em;
+}
+
+.trunc-text {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.ask-btn-vote {
+  padding: 0;
+  margin: 0 0.1rem;
+  font-size: 0.4rem;
+  border-radius: 0.1rem;
+}
+
+.ask-main-container {
+ min-height: 100vh;
+ padding-bottom: 3em;
+}
+
+.ask-footer {
+ bottom: 0;
+ width: 100%;
+}

@@ -1,0 +1,9 @@
+.idea/
+old/
+__pycache__/
+*.sqlite3*
+env/
+question/migrations/*_initial.py
+*/__pycache__/*
+/venv/*
+question/__pycache__

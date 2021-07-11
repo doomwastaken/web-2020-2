@@ -1,0 +1,17 @@
+{% load list_tags %}
+
+<div class="mt-5 mb-2 mx-2">
+  <p class="ask-block-header mb-2 ml-3">Popular tags</p>
+  <div class="container-fluid d-flex flex-wrap mb-2 mx-0 pl-3">
+    {% color_tag_links hot_tags as links %}
+    {% for link in links %}
+    <span class="ask-popular-tag">{{ link }}</span>
+    {% endfor %}
+  </div>
+  <p class="ask-block-header mb-2 ml-3">Best members</p>
+  <div class="container-fluid d-flex flex-column">
+    {% for user in best_users %}
+    <span class="ask-best-member">{{ user }}</span>
+    {% endfor %}
+  </div>
+</div>

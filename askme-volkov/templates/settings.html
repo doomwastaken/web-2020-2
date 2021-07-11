@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load list_tags %}
+
+{% block content %}
+
+<div class="row pl-3">
+  <p class="ask-block-header">Settings: {{ user.profile.nickname }}</p>
+</div>
+
+<div class="col-md-6 pl-0">
+  {% include 'inc/input_form.html'%}<!-- with submit='Save' -->
+</div>
+
+{% endblock content %}

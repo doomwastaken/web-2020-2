@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="row mb-2 pl-3">
+  <p class="ask-block-header align-self-baseline mr-3">New Question</p>
+</div>
+
+{% include 'inc/input_form.html' with submit='Ask!' %}
+
+{% endblock content %}
