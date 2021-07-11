@@ -54,11 +54,9 @@ class LikeManager(models.Manager):
         if not likes:
             self.create(author=author, content_object=content_object, is_positive=is_positive)
         elif not likes.filter(is_positive=is_positive).exists():
-            # Flip sign
             likes.update(is_positive=is_positive)
             rating_delta *= 2
         else:
-            # Like has already been set
             rating_delta = 0
 
         if rating_delta:

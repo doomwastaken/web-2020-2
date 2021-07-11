@@ -4,7 +4,7 @@ def simplest_wsgi_app(environ, start_response):
 
 def get_all_http(environ):
     response_body = [
-        '%s: %s' % (key, value) for key, value in sorted(environ.items()) if key.startswith('HTTP_')
+        '%s: %s' % (key, value) for key, value in sorted(environ.items()) #if key.startswith('HTTP_')
     ]
     return '\n'.join(response_body).encode('utf-8')
 

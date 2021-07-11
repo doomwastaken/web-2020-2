@@ -80,3 +80,18 @@ function mark_as_correct(qid) {
         }
     })
 }
+
+
+// $('.js_correct').click(function (ev) {
+//     // ev.preventDefault()
+//     var $this = $(this),
+//         answer_id = $this.data('aid'),
+//         question_id = $this.data('qid');
+//     $.ajax('/mark_correct/', {
+//         method: 'POST',
+//         data: {
+//             answer_id: answer_id,
+//             question_id: question_id,
+//         }
+//     })
+// })
